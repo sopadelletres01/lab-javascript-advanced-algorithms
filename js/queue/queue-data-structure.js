@@ -18,14 +18,16 @@ class Queue {
   enqueue(item) {
     // ... your code goes here
     if ( !this.canEnqueue() ) throw new Error("QUEUE_OVERFLOW")
-    this.queueControl.push(item)
+    //    this.queueControl.push(item)
+    this.queueControl.unshift(item)
     return this.queueControl;
   }
 
   dequeue() {
     // ... your code goes here
     if ( this.isEmpty() ) throw new Error("QUEUE_UNDERFLOW")
-    let lastItem = this.queueControl.shift()
+    //    let lastItem = this.queueControl.shift()
+    let lastItem = this.queueControl.pop()
     return lastItem;
 
   }

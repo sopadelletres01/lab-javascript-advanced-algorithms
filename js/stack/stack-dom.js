@@ -13,6 +13,7 @@ const newStack = new Stack();
 
 const clearStackInput = () => {
   // ... your code goes here
+  stackInput.value = "";
 };
 
 const renderListStack = () => {
@@ -32,11 +33,15 @@ const renderListStack = () => {
 
 renderListStack();
 
-const generateWarningStack = (type) => {
+const generateWarningStack = (type,error) => {
   if (type === 'underflow') {
     // ... your code goes here
+    warningBottomStack.style.display = "block"
+    warningBottomStack.innerText = error.message
   } else if (type === 'overflow') {
     // ... your code goes here
+    warningTopStack.style.display = "block"
+    warningTopStack.innerText = error.message
   }
 };
 
@@ -46,12 +51,11 @@ const addToStack = () => {
     listItem.innerText = stackInput.value;
     listItem.className = "active"
     newStack.push(listItem)
-    stackInput.value = "";
+    clearStackInput()
     renderListStack()
   } catch (error) {
     // there was an overflow error, handle it
-    warningTopStack.style.display = "block"
-    warningTopStack.innerText = error.message
+    generateWarningStack("overflow",error)
   }
 };
 
@@ -63,8 +67,7 @@ const removeFromStack = () => {
 
   } catch (error) {
     // there was an underflow error, handle it
-    warningBottomStack.style.display = "block"
-    warningBottomStack.innerText = error.message
+    generateWarningStack("underflow",error)
   }
 };
 
