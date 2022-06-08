@@ -14,15 +14,19 @@ ul.list-stack > li {
   transform: rotate(-180deg);
   height: 40px;
   text-align: center;
+  transition: all 2s linear;
+
 }
 
 li.inactive {
   background-color: rgb(224, 224, 224);
+  transition: all 2s linear;
 }
 
 li.active {
   background-color: rgb(50, 130, 221);
   color: white;
+  transition: all 2s linear;
 }
 
 ul.list-queue {

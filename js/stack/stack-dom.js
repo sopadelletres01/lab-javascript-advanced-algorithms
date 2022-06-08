@@ -18,12 +18,14 @@ const clearStackInput = () => {
 const renderListStack = () => {
   // ... your code goes here
   //Renderizar la lista con elementos en gris
+  warningTopStack.style.display = "none"
+  warningBottomStack.style.display = "none"
   let currentStack = newStack.display();
   console.log(currentStack)
   if ( stackList.hasChildNodes() ) stackList.innerHTML = ""
-  for (let i = 0; i <= newStack.MAX_SIZE; i++) {
-    let listItem = document.createElement("li")
-    listItem.className = currentStack[i] ? "active" : "inactive"
+  for (let i = 0; i < newStack.MAX_SIZE; i++) {
+    let listItem = currentStack[i] ?  currentStack[i] : document.createElement("li")
+    listItem.className = currentStack[i]?.className ? currentStack[i].className : "inactive"
     stackList.appendChild(listItem)
   }
 };
@@ -42,18 +44,27 @@ const addToStack = () => {
   try {
     let listItem = document.createElement("li")
     listItem.innerText = stackInput.value;
+    listItem.className = "active"
     newStack.push(listItem)
+    stackInput.value = "";
     renderListStack()
   } catch (error) {
     // there was an overflow error, handle it
+    warningTopStack.style.display = "block"
+    warningTopStack.innerText = error.message
   }
 };
 
 const removeFromStack = () => {
   try {
     // ... your code goes here
+    newStack.pop()
+    renderListStack()
+
   } catch (error) {
     // there was an underflow error, handle it
+    warningBottomStack.style.display = "block"
+    warningBottomStack.innerText = error.message
   }
 };
 
